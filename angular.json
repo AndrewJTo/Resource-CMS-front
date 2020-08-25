@@ -24,7 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/custom-theme.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -62,7 +63,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cmsfront:build"
+            "browserTarget": "cmsfront:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -119,6 +121,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "cmsfront"
+    }
+  },
+  "defaultProject": "cmsfront",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

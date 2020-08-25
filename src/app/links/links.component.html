@@ -1,0 +1,80 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Web Links</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<p>
+			Below is a list of external weblinks on this site, click one to view login details.
+		</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<button *ngIf="allowEditing" mat-button (click)="createNew()" color="primary">CREATE NEW LOGIN</button>
+	</mat-card-actions>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<mat-card *ngIf="openEditBox">
+	<form (submit)="submitEdit()" action="#" [formGroup]="editSettingsForm">
+		<mat-card-header>
+			<mat-card-title>Link Editor</mat-card-title>
+			<mat-card-subtitle *ngIf="newLink">Fill in details to add a new link</mat-card-subtitle>
+			<mat-card-subtitle *ngIf="!newLink">Edit the details below</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Link Text</mat-label>
+				<input formControlName="Text" matInput required>
+			</mat-form-field>
+			<br />
+			<mat-form-field appearance="fill">
+				<mat-label>Link URL</mat-label>
+				<input formControlName="Location" matInput required>
+			</mat-form-field>
+			<br />
+			<mat-form-field appearance="fill">
+				<mat-label>Link Username</mat-label>
+				<input formControlName="Username" matInput>
+			</mat-form-field>
+			<br />
+			<mat-form-field appearance="fill">
+				<mat-label>Link Password</mat-label>
+				<input formControlName="Password" matInput [type]="hideEditorPassword ? 'password' : 'text'">
+				<button mat-icon-button matSuffix type="button" (click)="hideEditorPassword = !hideEditorPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideEditorPassword">
+					<mat-icon>{{hideEditorPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+				</button>
+			</mat-form-field>
+			<br />
+		</mat-card-content>
+		<mat-card-actions>
+			<button type="submit" mat-button color="primary" [disabled]="!editSettingsForm.valid">SAVE</button>
+			<button type="button" mat-button color="warn" (click)="cancelEdit()">CANCEL</button>
+		</mat-card-actions>
+	</form>
+</mat-card>
+
+<mat-accordion class="links-headers-align">
+	<mat-expansion-panel *ngFor="let l of links" hideToggle>
+		<mat-expansion-panel-header>
+			<mat-panel-title>{{l.Link.text}}</mat-panel-title>
+      <mat-panel-description>
+				Click To Open
+				<mat-icon>date_range</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+		<mat-form-field appearance="fill" *ngIf="l.username != ''">
+			<mat-label>Username</mat-label>
+			<input matInput disabled [value]="l.username">
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="fill" *ngIf="l.password != ''">
+			<mat-label>Password</mat-label>
+			<input matInput disabled [value]="l.password">
+		</mat-form-field>
+		<mat-action-row>
+			<a [href]="l.Link.location" mat-button color="primary" >Visit Site</a>
+			<button *ngIf="allowEditing" (click)="editLink(l, l.Link)" mat-button color="primary" >Edit</button>
+			<button *ngIf="allowEditing" (click)="deleteLink(l)" mat-button color="warn" >Delete Link</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+</mat-accordion>

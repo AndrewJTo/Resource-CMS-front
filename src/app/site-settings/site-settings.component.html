@@ -1,0 +1,44 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Site Settings</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<p>
+		Use this button to change site name and the links in the side bar
+		</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<a routerLink="/app/settings/site/config" mat-button color="primary">SITE CONFIG</a>
+	</mat-card-actions>
+</mat-card>
+<mat-divider></mat-divider><br />
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Page Settings</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<p>
+			Below is a list of all the pages on this site, click one to view a list of options.
+			You can also add a new page
+		</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<a routerLink="/app/settings/page" mat-button color="primary">CREATE NEW PAGE</a>
+	</mat-card-actions>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<mat-accordion>
+	<mat-expansion-panel *ngFor="let p of pages">
+		<mat-expansion-panel-header>
+			<mat-panel-title>{{p.page_title}}</mat-panel-title>
+			<mat-panel-description>Click for options</mat-panel-description>
+		</mat-expansion-panel-header>
+		<mat-action-row>
+			<a routerLink="/app/page/{{p.page_title}}" mat-button color="primary" >View Page</a>
+			<a routerLink="/app/settings/page/{{p.page_title}}" mat-button color="primary" >Edit Page</a>
+			<button mat-button (click)="deletePrompt(p)" color="warn" >Delete Page</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+</mat-accordion>

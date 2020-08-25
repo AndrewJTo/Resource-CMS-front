@@ -1,0 +1,29 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>User Admin Page</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<p>
+			Below is a list of all registered users, click on one to view a list of options.
+			You can also add a new user:
+		</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<a routerLink="/app/settings/user/new" mat-button color="primary">CREATE NEW USER</a>
+	</mat-card-actions>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<mat-accordion>
+	<mat-expansion-panel *ngFor="let u of users">
+		<mat-expansion-panel-header>
+			<mat-panel-title>{{u.first_name}} {{u.last_name}}</mat-panel-title>
+			<mat-panel-description>Click for options</mat-panel-description>
+		</mat-expansion-panel-header>
+		<mat-action-row>
+			<a routerLink="/app/settings/user/{{u.id}}" mat-button color="primary" >Change Details</a>
+			<button (click)="deleteDialog(u)" mat-button color="warn" >Delete Account</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+</mat-accordion>

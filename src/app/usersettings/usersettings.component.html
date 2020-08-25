@@ -1,0 +1,74 @@
+<mat-card>
+	<form action="#" [formGroup]="userSettingsForm" (submit)="submitForm()">
+		<mat-card-header>
+			<mat-card-title *ngIf="newUser">Create user</mat-card-title>
+			<mat-card-title *ngIf="!newUser">Edit user</mat-card-title>
+
+			<mat-card-subtitle *ngIf="newUser">Fill this in to create a new user</mat-card-subtitle>
+			<mat-card-subtitle *ngIf="!newUser">Modify the fields below to edit the user</mat-card-subtitle>
+
+		</mat-card-header>
+
+		<mat-card-content>
+			<div class="edit-user-form-container">
+
+				<mat-form-field appearance="fill">
+					<mat-label *ngIf="!newUser" >New Email Address</mat-label>
+					<mat-label *ngIf="newUser">Account Email</mat-label>
+					<input formControlName="Email" matInput placeholder="pat@example.com">
+				</mat-form-field>
+				<br />
+
+				<mat-form-field appearance="fill">
+					<mat-label>Enter desired password</mat-label>
+					<input formControlName="Password" matInput [type]="hideNewPassword ? 'password' : 'text'">
+					<button mat-icon-button matSuffix type="button" (click)="hideNewPassword = !hideNewPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNewPassword">
+						<mat-icon>{{hideNewPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+					</button>
+				</mat-form-field>
+				<br />
+
+				<mat-form-field appearance="fill">
+					<mat-label *ngIf="newUser">First Name</mat-label>
+					<mat-label *ngIf="!newUser">New First Name</mat-label>
+					<input formControlName="FirstName" matInput [placeholder]="newUser ? 'Joe' : userDetails.user.first_name" [value]="editing.first_name">
+				</mat-form-field>
+
+				<br />
+
+				<mat-form-field appearance="fill">
+					<mat-label *ngIf="newUser">Last Name</mat-label>
+					<mat-label *ngIf="!newUser">New Last Name</mat-label>
+					<input formControlName="LastName" matInput [placeholder]="newUser ? 'Smith' : userDetails.user.last_name" [value]="editing.last_name">
+				</mat-form-field>
+
+				<br />
+				<mat-form-field appearance="fill" *ngIf="allowGroupChange">
+					<mat-label>Change Group</mat-label>
+					<mat-select [compareWith]="compareGroups" formControlName="formGroupSelect" >
+						<mat-option *ngFor="let g of avaliableGroups" [value]="g">{{g.group_name}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<br />
+
+				<mat-form-field *ngIf="requirePass" appearance="fill">
+					<mat-label>Current password</mat-label>
+					<input formControlName="Password_old" matInput [type]="hideOldPassword ? 'password' : 'text'">
+					<button mat-icon-button matSuffix type="button" (click)="hideOldPassword = !hideOldPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideOldPassword">
+						<mat-icon>{{hideOldPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+					</button>
+					<mat-hint>You must re-enter your password to make changes to your account</mat-hint>
+				</mat-form-field>
+
+				<p>Form value {{userSettingsForm.value | json}}</p>
+
+			</div>
+		</mat-card-content>
+
+		<mat-card-actions>
+			<button type="submit" mat-button color="primary">SAVE</button>
+			<button type="button" mat-button color="warn" (click)="cancel()">CANCEL</button>
+		</mat-card-actions>
+
+	</form>
+</mat-card>

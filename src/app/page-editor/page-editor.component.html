@@ -1,0 +1,33 @@
+<mat-card>
+	<form (submit)="doEdit()" action="#" [formGroup]="pageSettingsForm">
+		<mat-card-header>
+			<mat-card-title *ngIf="newPage">Create New Page</mat-card-title>
+			<mat-card-title *ngIf="!newPage">Edit Page</mat-card-title>
+
+			<mat-card-subtitle *ngIf="newPage">Fill in the form to edit the page. NOTE: Page titles must be unique.</mat-card-subtitle>
+			<mat-card-subtitle *ngIf="!newPage">Fill in the form to create a page. NOTE: Page titles must be unique.</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<div class="edit-page-form-container">
+				<mat-form-field appearance="fill">
+					<mat-label>Page Title</mat-label>
+					<input formControlName="Title" matInput required>
+				</mat-form-field>
+				<br />
+
+				<mat-form-field appearance="fill" class="page-content-area">
+					<mat-label>Page Content</mat-label>
+					<textarea formControlName="Text" matInput required></textarea>
+				</mat-form-field>
+			</div>
+			<p>Form value {{pageSettingsForm.value | json}}</p>
+		</mat-card-content>
+
+		<mat-card-actions>
+			<button type="submit" mat-button color="primary" [disabled]="!pageSettingsForm.valid">SAVE</button>
+			<button type="button" mat-button color="warn" (click)="cancel()">CANCEL</button>
+		</mat-card-actions>
+
+	</form>
+</mat-card>
+
