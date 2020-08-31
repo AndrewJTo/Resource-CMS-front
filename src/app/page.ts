@@ -1,8 +1,8 @@
 export interface Page {
 	page_title: string;
 	page_text: string;
-	permissions: Permissions
+	permissions: Perms
 }
-export interface Permissions {
+export interface Perms {
 	all_users_view: boolean
 }

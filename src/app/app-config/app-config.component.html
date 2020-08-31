@@ -6,8 +6,9 @@
 		<p>Below is a list of links in the sidebar. You can drag to re-order them. Or add a new link with the button below</p>
 	</mat-card-content>
 	<mat-card-actions>
+		<button mat-button (click)="addDivider()" color="primary" *ngIf="!showNewLinkDialog">ADD DIVIDER</button>
 		<button mat-button (click)="openNewLinkForm()" color="primary" *ngIf="!showNewLinkDialog">ADD LINK</button>
-		<button mat-button (click)="saveLinkChanges()" color="primary" *ngIf="linksChanged">SAVE CHANGES</button>
+		<button mat-button (click)="saveLinkChanges()" color="warn" *ngIf="linksChanged">SAVE CHANGES</button>
 	</mat-card-actions>
 </mat-card>
 

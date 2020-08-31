@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms'
 import {Location} from '@angular/common'
-import {Page, Permissions} from '../page'
+import {Page, Perms} from '../page'
 import {PageService} from '../page.service'
 import {MatSnackBar} from '@angular/material/snack-bar'
 

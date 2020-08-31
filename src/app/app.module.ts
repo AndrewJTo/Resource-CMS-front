@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -29,7 +29,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AppConfigComponent } from './app-config/app-config.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { LinksComponent } from './links/links.component'; 
+import { LinksComponent } from './links/links.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LinksComponent } from './links/links.component';
     PageEditorComponent,
     AppConfigComponent,
     LinksComponent,
-		AdminDeleteDialog	
+		AdminDeleteDialog,
+		SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,9 @@ import { LinksComponent } from './links/links.component';
 		MatDialogModule,
 		DragDropModule
   ],
-  providers: [],
+  providers: [
+		Title
+	],
   bootstrap: [
 		AppComponent,
 	]

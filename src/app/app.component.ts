@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import {AppConfigService} from './app-config.service'
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  constructor() { }
+  constructor(private configService: AppConfigService, private title: Title) {
+	}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+		this.configService.getTitle().subscribe(t => {
+			this.title.setTitle(t)
+			this.configService.siteTitle = t
+		})
+	}
 }

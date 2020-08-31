@@ -26,6 +26,16 @@ export class AppConfigComponent implements OnInit {
 	showNewLinkDialog = false
 	linksChanged = false
 	titleChanged = false
+
+	addDivider(){
+		var link:Link = {text: "**DIVIDER**", location: ""}
+		if(this.links == null){
+			this.links = [link]
+		} else {
+			this.links.push(link)
+		}
+		this.linksChanged = true
+	}
 	
 	changeName(){
 		console.log("Saving Title changes: " + this.siteNameGroup.value['SiteTitle'])
@@ -54,6 +64,7 @@ export class AppConfigComponent implements OnInit {
 		if(index !== -1){
 			this.links.splice(index, 1)
 		}
+		this.linksChanged = true
 	}
 
 	submitNewLink(){

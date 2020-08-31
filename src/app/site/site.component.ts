@@ -13,9 +13,9 @@ import {Router} from '@angular/router'
   styleUrls: ['./site.component.scss']
 })
 export class SiteComponent implements OnInit {
-	user: User
-	group: Group
-	sideBar: SiteConfig
+	user: User = {id: "", creation_date: 0, first_name: "", last_name: ""}
+	group: Group = {id: "",	group_name: "", write_resources: false,	write_pages: false,	user_admin: false, site_admin: false, sudo: false}
+	sideBar: SiteConfig = {Title: "", Links:[]}
 	showSettings = true
 	title: string 
 

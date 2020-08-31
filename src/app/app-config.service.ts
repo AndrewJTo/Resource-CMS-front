@@ -9,6 +9,12 @@ import { SiteConfig } from './links'
 })
 export class AppConfigService {
 
+	public siteTitle: string
+
+	getTitle(): Observable<string>{
+		return this.http.get<string>("/api/site/title").pipe(catchError(this.handleError<string>("Get title ")))
+	}
+
   constructor(private http: HttpClient) {}
 
 	saveChanges(config: SiteConfig){

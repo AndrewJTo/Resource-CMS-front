@@ -9,7 +9,10 @@
 <mat-sidenav-container >
 	<mat-sidenav #drawer mode="side" opened>
 		<mat-nav-list>
-			<a mat-list-item *ngFor="let link of sideBar.Links" [href]="link.location">{{link.text}}</a>
+			<ng-container *ngFor="let link of sideBar.Links">
+				<a mat-list-item *ngIf="link.text!='**DIVIDER**'" [href]="link.location">{{link.text}}</a>
+				<mat-divider *ngIf="link.text=='**DIVIDER**'"></mat-divider>
+			</ng-container>
 			<a routerLink="/app/settings/site/config" mat-button color="primary" *ngIf="group.site_admin">Edit Sidebar</a>
 			<a routerLink="/app/dir" mat-button color="primary" *ngIf="group.site_admin">Browse Files</a>
 			<mat-divider></mat-divider>

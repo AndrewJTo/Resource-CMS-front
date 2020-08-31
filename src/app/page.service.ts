@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Page } from './page'
+import { Page, Perms} from './page'
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap} from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
@@ -40,8 +40,8 @@ export class PageService {
 	private handlePageError<Page>(operation = 'op', result?:Page){
 		return (error: any): Observable<Page> => {
 			console.error(error)
-			
-		return of(result)
+
+			return of(error)
 		}
 	}
 }

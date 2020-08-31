@@ -13,7 +13,9 @@ import {AppConfigComponent} from './app-config/app-config.component'
 import {LinksComponent} from './links/links.component'
 
 const routes: Routes = [
-	{ path: 'app', component: SiteComponent, children:[
+	{ path: '', redirectTo: 'app/page/home', pathMatch:'full'},
+	{ 
+		path: 'app', component: SiteComponent, children:[
 		{ path: 'page/:page_title', component: PageComponent},
 		{ path: 'page', redirectTo: 'page/home', pathMatch: 'full' },
 		{ path: 'dir', component: DirlistComponent, children:[{path: '**', component: DirlistComponent}] },
@@ -25,11 +27,11 @@ const routes: Routes = [
 		{ path: 'settings/site/config', component: AppConfigComponent},
 		{ path: 'links', component: LinksComponent}
 	]},
-	{ path: 'login', component: LoginComponent}
+	{ path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [RouterModule.forRoot(routes, {useHash: false, anchorScrolling: 'enabled'})],
 	exports: [RouterModule]
 })
 export class AppRoutingModule { }

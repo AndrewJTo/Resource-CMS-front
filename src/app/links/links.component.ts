@@ -112,8 +112,17 @@ export class LinksComponent implements OnInit {
 
   ngOnInit(): void {
 		this.fetchLinks()
-		if(this.userService.curSession.group.site_admin){
-			this.allowEditing = true
+		if(this.userService.curSession == null){
+			this.userService.getSession().subscribe(s => {
+				this.userService.curSession = s
+				if(this.userService.curSession.group.site_admin){
+					this.allowEditing = true
+				}
+			})
+		} else {
+			if(this.userService.curSession.group.site_admin){
+				this.allowEditing = true
+			}
 		}
   }
 
