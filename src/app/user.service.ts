@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
 	getGroupList(){
-		return this.http.get<Group[]>("api/groups").pipe(catchError(this.handleError<Group[]>("Get group list")))
+		return this.http.get<Group[]>("/api/groups").pipe(catchError(this.handleError<Group[]>("Get group list")))
 	}
 
 	getSession(){

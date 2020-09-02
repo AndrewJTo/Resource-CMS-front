@@ -6,8 +6,8 @@
 	<span class="topbar-spacer"></span>
 	<span>{{user.first_name}} {{user.last_name}}</span>
 </mat-toolbar>
-<mat-sidenav-container >
-	<mat-sidenav #drawer mode="side" opened>
+<mat-sidenav-container>
+	<mat-sidenav #drawer mode="side" [opened]="!mobileQuery.matches" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 		<mat-nav-list>
 			<ng-container *ngFor="let link of sideBar.Links">
 				<a mat-list-item *ngIf="link.text!='**DIVIDER**'" [href]="link.location">{{link.text}}</a>

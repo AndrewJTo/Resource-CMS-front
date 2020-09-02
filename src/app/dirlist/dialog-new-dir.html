@@ -1,0 +1,12 @@
+<h1 mat-card-title>New Folder</h1>
+<div mat-card-field>
+	<p>Creating a new folder in '{{data.currLoc}}'</p>
+	<mat-form-field>
+		<mat-label>New Folder Name</mat-label>
+		<input matInput [(ngModel)]="data.newDirName">
+	</mat-form-field>
+</div>
+<div mat-dialog-actions>
+	<button mat-button color="warn" (click)="onNoClick()">CLOSE</button>
+	<button mat-button color="primary" cdkFocusInitial [mat-dialog-close]="data.newDirName">CREATE</button>
+</div>

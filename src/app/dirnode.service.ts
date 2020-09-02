@@ -1,19 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Fnode } from './node'
+import {HttpClient} from '@angular/common/http'
+import { Fnode, FileObject, DirNode, NewObj } from './node'
+import { Observable, of } from 'rxjs'
+import { catchError, map, tap } from 'rxjs/operators';
+import {OpResponse} from './comms'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DirnodeService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-	getDirList (loc:string): Fnode[] {
-		return [
-			{title:"file 1", location:"/asd/test", type:"file", url:"/asd/test"},
-			{title:"file 2", location:"/asd/test", type:"file", url:"/asd/test"},
-			{title:"file 3", location:"/asd/test", type:"file", url:"/asd/test"},
-			{title:"dir1", location:"/asd/test", type:"dir", url:"/asd/test"}
-		]
+	upload(url: string, file: File){
+		return this.http.put(url, file).pipe(catchError(this.handleS3Error("Upload error")))
 	}
+
+	delete(loc: string){
+		return this.http.delete<OpResponse>("/api/files" + loc).pipe(catchError(this.handleError<OpResponse>("Deleting: " + loc)))
+	}
+
+	create(loc:string, details: NewObj){
+		return this.http.put<OpResponse>("/api/files" + loc, details).pipe(catchError(this.handleError<OpResponse>("Creating " + details.Type)))
+	}
+
+	getDirList (loc:string) {
+		return this.http.get<DirNode>("/api/files" + loc).pipe(catchError(this.handleError("Get list")))
+	}
+
+	private handleS3Error<T>(operation='op', result?:T){
+		return (error: any): Observable<T> => {
+			console.log(error)
+			return of(result as T)
+		}
+	}
+
+	private handleError<OpResponse>(operation = 'op', result?:OpResponse){
+		return (error: any): Observable<OpResponse> => {
+			return of(error.error)
+		}
+	}
+
 }

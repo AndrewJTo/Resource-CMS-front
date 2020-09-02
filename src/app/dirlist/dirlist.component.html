@@ -1,9 +1,31 @@
+<app-file-uploader [path]="nodes.node.Location+nodes.node.Title" (closed)="closeUploader($event)" *ngIf="showUpload"></app-file-uploader>
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>{{nodes.node.Title}}</mat-card-title>
+		<mat-card-subtitle>{{nodes.node.Location}}{{nodes.node.Title}}</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-actions>
+		<a mat-button routerLink="/app/dir{{nodes.node.Location}}" color="accent">UP</a>
+		<button mat-button (click)="newDirDialog()" color="primary" *ngIf="allowEdits">NEW FOLDER</button>
+		<button mat-button (click)="showUploader()" *ngIf="!showUpload && allowEdits" color="primary">UPLOAD FILE</button>
+	</mat-card-actions>	
+</mat-card>
 <mat-nav-list>
-	<a mat-list-item *ngFor="let node of nodes" href='{{this.router.url}}{{node.url}}'>
-		<mat-icon mat-list-icon *ngIf="node.type=='dir'">folder</mat-icon>
-		<mat-icon mat-list-icon *ngIf="node.type=='file'">note</mat-icon>
-		<div mat-line>{{node.title}}</div>
-		<div mat-line>{{node.type}}</div>
-		<div mat-line>{{node.url}}</div>
-	</a>
+	<div mat-subheader>Folders</div>
+	<mat-list-item *ngFor="let node of dirs">
+		<mat-icon href='{{this.router.url}}/{{node.Title}}' mat-list-icon *ngIf="node.Type=='dir'">folder</mat-icon>
+		<mat-icon href='{{this.router.url}}/{{node.Title}}' mat-list-icon *ngIf="node.Type=='file'">note</mat-icon>
+		<a mat-line href='{{this.router.url}}/{{node.Title}}'>{{node.Title}}</a>
+		<a mat-line href='{{this.router.url}}/{{node.Title}}' *ngIf="node.Type=='dir'">Folder</a>
+		<button (click)="delete(node)" mat-mini-fab aria-label="Delete Dir" *ngIf="allowEdits"><mat-icon>delete</mat-icon></button>
+	</mat-list-item>
+	<div mat-subheader>Files</div>
+	<mat-list-item *ngFor="let node of files">
+		<mat-icon mat-list-icon >note</mat-icon>
+		<a href='{{this.router.url}}/{{node.Title}}' mat-line>{{node.Title}}</a>
+		<button *ngIf="allowEdits" (click)="delete(node)" mat-mini-fab aria-label="Delete File">
+			<mat-icon>delete</mat-icon>
+		</button>
+	</mat-list-item>
+
 </mat-nav-list>

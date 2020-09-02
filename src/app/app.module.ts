@@ -17,7 +17,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { DirlistComponent } from './dirlist/dirlist.component';
+import { DirlistComponent, DialogNewDir } from './dirlist/dirlist.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent, AdminDeleteDialog } from './admin/admin.component';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -31,6 +31,7 @@ import { AppConfigComponent } from './app-config/app-config.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { LinksComponent } from './links/links.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,9 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     AppConfigComponent,
     LinksComponent,
 		AdminDeleteDialog,
-		SafeHtmlPipe
+		SafeHtmlPipe,
+		DialogNewDir,
+		FileUploaderComponent
   ],
   imports: [
     BrowserModule,
