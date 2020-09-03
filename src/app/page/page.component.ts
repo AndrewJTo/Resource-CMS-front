@@ -25,6 +25,8 @@ export class PageComponent{
 			} else {
 				this.notFound = false
 				this.page = page
+				//Ensure that local page anchor links work
+				this.page.page_text = this.page.page_text.replace('href="#', 'href="' + this.router.url + '#')
 			}
 
 		})
