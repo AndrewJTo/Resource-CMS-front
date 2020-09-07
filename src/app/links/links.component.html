@@ -53,28 +53,59 @@
 	</form>
 </mat-card>
 
-<mat-accordion class="links-headers-align">
-	<mat-expansion-panel *ngFor="let l of links" hideToggle>
-		<mat-expansion-panel-header>
-			<mat-panel-title>{{l.Link.text}}</mat-panel-title>
-      <mat-panel-description>
-				Click To Open
-				<mat-icon>date_range</mat-icon>
-			</mat-panel-description>
-		</mat-expansion-panel-header>
-		<mat-form-field appearance="fill" *ngIf="l.username != ''">
-			<mat-label>Username</mat-label>
-			<input matInput disabled [value]="l.username">
-		</mat-form-field>
-		<br />
-		<mat-form-field appearance="fill" *ngIf="l.password != ''">
-			<mat-label>Password</mat-label>
-			<input matInput disabled [value]="l.password">
-		</mat-form-field>
-		<mat-action-row>
-			<a [href]="l.Link.location" mat-button color="primary" >Visit Site</a>
-			<button *ngIf="allowEditing" (click)="editLink(l, l.Link)" mat-button color="primary" >Edit</button>
-			<button *ngIf="allowEditing" (click)="deleteLink(l)" mat-button color="warn" >Delete Link</button>
-		</mat-action-row>
-	</mat-expansion-panel>
-</mat-accordion>
+<mat-grid-list cols="2" rowHeight="2:1">
+	<mat-grid-tile>
+		<mat-accordion class="links-headers-align">
+			<mat-expansion-panel *ngFor="let l of leftSide" hideToggle>
+				<mat-expansion-panel-header>
+					<mat-panel-title><a [href]="l.Link.location">{{l.Link.text}}</a></mat-panel-title>
+					<mat-panel-description>
+						Click For Details
+						<mat-icon>date_range</mat-icon>
+					</mat-panel-description>
+				</mat-expansion-panel-header>
+				<mat-form-field appearance="fill" *ngIf="l.username != ''">
+					<mat-label>Username</mat-label>
+					<input matInput disabled [value]="l.username">
+				</mat-form-field>
+				<br />
+				<mat-form-field appearance="fill" *ngIf="l.password != ''">
+					<mat-label>Password</mat-label>
+					<input matInput disabled [value]="l.password">
+				</mat-form-field>
+				<mat-action-row>
+					<a [href]="l.Link.location" mat-button color="primary" >Visit Site</a>
+					<button *ngIf="allowEditing" (click)="editLink(l, l.Link)" mat-button color="primary" >Edit</button>
+					<button *ngIf="allowEditing" (click)="deleteLink(l)" mat-button color="warn" >Delete Link</button>
+				</mat-action-row>
+			</mat-expansion-panel>
+		</mat-accordion>
+	</mat-grid-tile>
+	<mat-grid-tile>
+		<mat-accordion class="links-headers-align">
+			<mat-expansion-panel *ngFor="let l of rightSide" hideToggle>
+				<mat-expansion-panel-header>
+					<mat-panel-title><a [href]="l.Link.location">{{l.Link.text}}</a></mat-panel-title>
+					<mat-panel-description>
+						Click For Details
+						<mat-icon>date_range</mat-icon>
+					</mat-panel-description>
+				</mat-expansion-panel-header>
+				<mat-form-field appearance="fill" *ngIf="l.username != ''">
+					<mat-label>Username</mat-label>
+					<input matInput disabled [value]="l.username">
+				</mat-form-field>
+				<br />
+				<mat-form-field appearance="fill" *ngIf="l.password != ''">
+					<mat-label>Password</mat-label>
+					<input matInput disabled [value]="l.password">
+				</mat-form-field>
+				<mat-action-row>
+					<a [href]="l.Link.location" mat-button color="primary" >Visit Site</a>
+					<button *ngIf="allowEditing" (click)="editLink(l, l.Link)" mat-button color="primary" >Edit</button>
+					<button *ngIf="allowEditing" (click)="deleteLink(l)" mat-button color="warn" >Delete Link</button>
+				</mat-action-row>
+			</mat-expansion-panel>
+		</mat-accordion>
+	</mat-grid-tile>
+</mat-grid-list>

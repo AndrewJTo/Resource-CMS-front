@@ -1,0 +1,31 @@
+<mat-card>
+	<form (submit)="doneEdit()" action="#" [formGroup]="eventForm">
+		<mat-card-header>
+			<mat-card-title *ngIf="isNew">Create Event</mat-card-title>
+			<mat-card-title *ngIf="!isNew">Edit Event</mat-card-title>
+			<mat-card-subtitle>Fill out the form below</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Event Title</mat-label>
+				<input formControlName="Title" matInput required>
+			</mat-form-field>
+			<br />
+			<mat-form-field appearance="fill">
+				<mat-label>Note</mat-label>
+				<textarea formControlName="Note" matInput></textarea>
+			</mat-form-field>
+			<br />
+			<mat-form-field appearance="fill">
+				<mat-label>Choose a date</mat-label>
+				<input matInput [matDatepicker]="picker" formControlName="Date">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker ></mat-datepicker>
+			</mat-form-field>
+		</mat-card-content>
+		<mat-card-actions>
+			<button type="submit" mat-button color="primary">SAVE</button>
+			<button type="button" mat-button color="warn" (click)="cancel()">CANCEL</button>
+		</mat-card-actions>
+	</form>
+</mat-card>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Fnode, FileObject, DirNode, NewObj } from './node'
 import { Observable, of } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
@@ -11,6 +11,11 @@ import {OpResponse} from './comms'
 export class DirnodeService {
 
   constructor(private http: HttpClient) { }
+
+	getS3Text(url: string){
+		const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+		return this.http.get(url, { headers, responseType: "text"}).pipe(catchError(this.handleError("File get error")))
+	}
 
 	upload(url: string, file: File){
 		return this.http.put(url, file).pipe(catchError(this.handleS3Error("Upload error")))

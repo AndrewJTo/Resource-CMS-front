@@ -1,0 +1,18 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Calendar</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<mat-list *ngIf="events != null">
+			<mat-list-item *ngFor="let e of events; let even = even; let odd = odd" [ngClass]="{odd: odd, even: even}">
+				<div mat-line>{{e.title}}</div>
+				<div mat-line><span *ngIf="e.note != ''">{{e.note}} - </span>{{e.date | date:'d/M/yy (E)'}}</div>
+				<button (click)="delete(e)" mat-mini-fab aria-label="Edit Event" *ngIf="allowEdit"><mat-icon>delete</mat-icon></button>
+				<a routerLink="/app/settings/event/{{e.id}}" mat-mini-fab aria-label="Edit Event" *ngIf="allowEdit"><mat-icon>create</mat-icon></a>
+			</mat-list-item>
+		</mat-list>
+	</mat-card-content>
+	<mat-card-actions>
+		<a mat-button routerLink="/app/settings/event" *ngIf="allowEdit">ADD NEW</a>
+	</mat-card-actions>
+</mat-card>

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core'
+import { Location } from '@angular/common'
 import {Fnode, DirNode, FileObject, NewObj} from '../node';
 import {ActivatedRoute} from '@angular/router';
 import {DirnodeService} from '../dirnode.service'
@@ -7,6 +8,7 @@ import { OpResponse } from '../comms'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FileUploaderComponent} from '../file-uploader/file-uploader.component'
+import {ShowResourceComponent} from '../show-resource/show-resource.component'
 import {UserService} from '../user.service'
 
 @Component({
@@ -20,9 +22,21 @@ export class DirlistComponent implements OnInit {
 	files: Fnode[] = []
 	showUpload:Boolean
 	allowEdits = false
+	showPreviewer:Boolean
+	previewerUrl:string
+	previewerExt:string
 
-  constructor(private userService: UserService, private _snackBar: MatSnackBar, public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private nodeService: DirnodeService) { }
+  constructor(public location: Location, private userService: UserService, private _snackBar: MatSnackBar, public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private nodeService: DirnodeService) { }
 
+	compareNodes(a: Fnode , b: Fnode){
+		if(a.Title < b.Title){
+			return -1
+		} else if (a.Title > b.Title){
+			return 1
+		} else {
+			return 0
+		}
+	}
 	closeUploader(reload: boolean){
 		console.log("closed uploader" + reload)
 		this.showUpload = false
@@ -71,6 +85,7 @@ export class DirlistComponent implements OnInit {
 	}
 
 	getDir(loc: string): void {
+		this.showPreviewer = false
 		this.dirs = []
 		this.files = []
 		loc = loc.substring(8)
@@ -83,10 +98,19 @@ export class DirlistComponent implements OnInit {
 				var r = <OpResponse>resp
 				console.log(r.msg)
 				if(r.success){
-					window.location.replace(r.msg)
+					var ext = loc.substr(loc.lastIndexOf('.') + 1)
+					console.log(ext)
+					if(ext == "txt" || ext == "html" || ext == "htm" || ext == "pdf"){
+						this.previewerUrl = r.msg
+						this.previewerExt = ext
+						this.showPreviewer = true
+					} else {
+						window.location.replace(r.msg)
+					}
 				}
 			} else {
 				this.nodes = <DirNode>resp
+				this.nodes.children.sort(this.compareNodes)
 				console.log(this.nodes)
 				for(let c of this.nodes.children) {
 					if(c.Type == "dir"){

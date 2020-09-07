@@ -3,3 +3,5 @@
 <button *ngIf="allowEditing" mat-button (click)="edit()" color="warn" [innerHTML]="notFound ? 'CREATE' : 'EDIT'">-</button>
 <div [innerHTML]="page.page_text | safeHtml">
 </div>
+<app-calendar *ngIf="page.page_title=='home'"></app-calendar>
+

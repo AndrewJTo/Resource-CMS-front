@@ -32,6 +32,13 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { LinksComponent } from './links/links.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ShowResourceComponent } from './show-resource/show-resource.component';
+import { EventEditorComponent } from './event-editor/event-editor.component'
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatNativeDateModule} from '@angular/material/core';
+import { CalendarComponent } from './calendar/calendar.component'
+import {DatePipe} from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -50,7 +57,10 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 		AdminDeleteDialog,
 		SafeHtmlPipe,
 		DialogNewDir,
-		FileUploaderComponent
+		FileUploaderComponent,
+		ShowResourceComponent,
+		EventEditorComponent,
+		CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +81,10 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 		MatSelectModule,
 		MatSnackBarModule,
 		MatDialogModule,
-		DragDropModule
+		DragDropModule,
+		MatGridListModule,
+		MatDatepickerModule,
+		MatNativeDateModule
   ],
   providers: [
 		Title

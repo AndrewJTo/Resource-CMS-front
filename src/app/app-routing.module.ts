@@ -11,6 +11,8 @@ import {SiteSettingsComponent} from './site-settings/site-settings.component'
 import {PageEditorComponent} from './page-editor/page-editor.component'
 import {AppConfigComponent} from './app-config/app-config.component'
 import {LinksComponent} from './links/links.component'
+import {EventEditorComponent} from './event-editor/event-editor.component'
+import {CalendarComponent} from './calendar/calendar.component'
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'app/page/home', pathMatch:'full'},
@@ -25,7 +27,10 @@ const routes: Routes = [
 		{ path: 'settings/page', component: PageEditorComponent},
 		{ path: 'settings/page/:page_title', component: PageEditorComponent},
 		{ path: 'settings/site/config', component: AppConfigComponent},
-		{ path: 'links', component: LinksComponent}
+		{ path: 'settings/event', component: EventEditorComponent},
+		{ path: 'settings/event/:eid', component: EventEditorComponent},
+		{ path: 'links', component: LinksComponent},
+		{ path: 'cal', component: CalendarComponent}
 	]},
 	{ path: 'login', component: LoginComponent},
 ];

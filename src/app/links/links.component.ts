@@ -6,6 +6,8 @@ import {Link, LinkLogon } from '../links'
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms'
 import {UserService} from '../user.service'
+import {Router} from '@angular/router'
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-links',
@@ -19,6 +21,9 @@ export class LinksComponent implements OnInit {
 	newLink = true
 	openEditBox = false
 	allowEditing = false
+
+	leftSide: LinkLogon[]
+	rightSide: LinkLogon[]
 
 	editSettingsForm = this.fb.group({
 		Text: ['', Validators.required],
@@ -104,11 +109,14 @@ export class LinksComponent implements OnInit {
 	fetchLinks(){
 		this.linksService.getLinkss().subscribe(response =>{
 			this.links = response
+			this.leftSide = response.splice(0, Math.floor(response.length/2))
+			this.rightSide = response.splice(Math.ceil(response.length/2), response.length)
+			console.log(Math.floor(response.length/2) + " : other?")
 			console.log(this.links)
 		})
 	}
 
-  constructor(private userService: UserService, private fb: FormBuilder, private _snackbar: MatSnackBar, private linksService: LinksService) { }
+  constructor(private router: Router, private userService: UserService, private fb: FormBuilder, private _snackbar: MatSnackBar, private linksService: LinksService) { }
 
   ngOnInit(): void {
 		this.fetchLinks()
