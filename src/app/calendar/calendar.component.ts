@@ -41,17 +41,23 @@ export class CalendarComponent implements OnInit {
 				var now = new Date()
 				console.log(now)
 				console.log("############")
+				var trim = 0
 				for(let e of this.events){
+					console.log(e)
 					var d = new Date(e.date)
+					console.log(e.date)
 					console.log(d)
-					if(d < now){
+					if(d <= now){
 						console.log("REMOVED")
-						this.events.shift()
+						trim ++
 					} else {
-						console.log("DONE")
+						console.log("KEPT")
 						break
 					}
 				}
+				console.log("Done")
+				this.events.splice(0, trim)
+				console.log(this.events)
 			}
 		})
 	}
