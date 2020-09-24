@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <h1>{{page.page_title}}</h1>
 <button *ngIf="allowEditing" mat-button (click)="edit()" color="warn" [innerHTML]="notFound ? 'CREATE' : 'EDIT'">-</button>
-<div [innerHTML]="page.page_text | safeHtml">
+<div *ngIf="page.page_title != 'home'" [innerHTML]="page.page_text | safeHtml">
 </div>
-<app-calendar *ngIf="page.page_title=='home'"></app-calendar>
 
+<div *ngIf="page.page_title == 'home'" class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+	<div fxFlex="25%" fxFlex.xs="100%" [innerHTML]="page.page_text | safeHtml"></div>
+	<app-calendar fxFlex="75%" fxFlex.xs="100%" *ngIf="page.page_title=='home'"></app-calendar>
+</div>

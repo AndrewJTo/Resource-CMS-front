@@ -1,1 +1,8 @@
-<div *ngIf="text != null" [innerHtml]="text | safeHtml"></div>
+<script *ngIf="!docViewer">
+	  function resizeIframe(obj) {
+				    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+				  }
+</script>
+<div *ngIf="text != null && !docViewer" [innerHtml]="text | safeHtml"></div>
+
+<iframe *ngIf="docViewer" frameborder="no" [src]="getPrevURL()"></iframe>

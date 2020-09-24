@@ -39,6 +39,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker'
 import {MatNativeDateModule} from '@angular/material/core';
 import { CalendarComponent } from './calendar/calendar.component'
 import {DatePipe} from '@angular/common'
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import {DatePipe} from '@angular/common'
 		DragDropModule,
 		MatGridListModule,
 		MatDatepickerModule,
-		MatNativeDateModule
+		MatNativeDateModule,
+		FlexLayoutModule,
   ],
   providers: [
 		Title

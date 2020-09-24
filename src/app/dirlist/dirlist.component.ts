@@ -48,7 +48,7 @@ export class DirlistComponent implements OnInit {
 
 	delete(node: Fnode){
 		console.log("delete node")
-		this.nodeService.delete(node.Location + node.Title).subscribe(resp => {
+		this.nodeService.delete(node.Location + "/" + node.Title).subscribe(resp => {
 			this._snackBar.open(resp.msg, "OK")
 			this.getDir(this.router.url)
 		})
@@ -100,7 +100,7 @@ export class DirlistComponent implements OnInit {
 				if(r.success){
 					var ext = loc.substr(loc.lastIndexOf('.') + 1)
 					console.log(ext)
-					if(ext == "txt" || ext == "html" || ext == "htm" || ext == "pdf"){
+					if(ext == "txt" || ext == "ppt" || ext == "pptx" || ext == "html" || ext == "htm" || ext == "pdf" || ext == "doc" || ext == "docx" || ext == "xlsx" || ext == "xls"){
 						this.previewerUrl = r.msg
 						this.previewerExt = ext
 						this.showPreviewer = true

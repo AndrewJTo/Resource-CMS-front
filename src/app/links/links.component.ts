@@ -22,9 +22,6 @@ export class LinksComponent implements OnInit {
 	openEditBox = false
 	allowEditing = false
 
-	leftSide: LinkLogon[]
-	rightSide: LinkLogon[]
-
 	editSettingsForm = this.fb.group({
 		Text: ['', Validators.required],
 		Location: ['', Validators.required],
@@ -109,10 +106,6 @@ export class LinksComponent implements OnInit {
 	fetchLinks(){
 		this.linksService.getLinkss().subscribe(response =>{
 			this.links = response
-			this.leftSide = response.splice(0, Math.floor(response.length/2))
-			this.rightSide = response.splice(Math.ceil(response.length/2), response.length)
-			console.log(Math.floor(response.length/2) + " : other?")
-			console.log(this.links)
 		})
 	}
 
