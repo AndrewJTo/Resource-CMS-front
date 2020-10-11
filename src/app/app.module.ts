@@ -40,7 +40,12 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { CalendarComponent } from './calendar/calendar.component'
 import {DatePipe} from '@angular/common'
 import { FlexLayoutModule } from "@angular/flex-layout";
+import {JitCompilerFactory} from '@angular/platform-browser-dynamic';
+import {Compiler, COMPILER_OPTIONS, CompilerFactory} from '@angular/core';
 
+export function createCompiler(compilerFactory: CompilerFactory) {
+	return compilerFactory.createCompiler();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +94,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 		FlexLayoutModule,
   ],
   providers: [
-		Title
+		Title,
+		{provide: COMPILER_OPTIONS, useValue: {}, multi: true},
+		{provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS]},
+		{provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory]}
 	],
   bootstrap: [
 		AppComponent,
