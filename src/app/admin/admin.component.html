@@ -9,11 +9,11 @@
 		</p>
 	</mat-card-content>
 	<mat-card-actions>
-		<a routerLink="/app/settings/user/new" mat-button color="primary">CREATE NEW USER</a>
+		<a routerLink="/app/settings/user/new" mat-raised-button color="primary">CREATE NEW USER</a>
 	</mat-card-actions>
 </mat-card>
 
-<mat-divider></mat-divider>
+<br />
 
 <mat-accordion>
 	<mat-expansion-panel *ngFor="let u of users">
@@ -22,7 +22,7 @@
 			<mat-panel-description>Click for options</mat-panel-description>
 		</mat-expansion-panel-header>
 		<mat-action-row>
-			<a routerLink="/app/settings/user/{{u.id}}" mat-button color="primary" >Change Details</a>
+			<a routerLink="/app/settings/user/{{u.id}}" mat-raised-button color="primary" >Change Details</a>
 			<button (click)="deleteDialog(u)" mat-button color="warn" >Delete Account</button>
 		</mat-action-row>
 	</mat-expansion-panel>

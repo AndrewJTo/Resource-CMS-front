@@ -8,10 +8,10 @@
 		</p>
 	</mat-card-content>
 	<mat-card-actions>
-		<a routerLink="/app/settings/site/config" mat-button color="primary">SITE CONFIG</a>
+		<a routerLink="/app/settings/site/config" mat-raised-button color="primary">SITE CONFIG</a>
 	</mat-card-actions>
 </mat-card>
-<mat-divider></mat-divider><br />
+<br />
 <mat-card>
 	<mat-card-header>
 		<mat-card-title>Page Settings</mat-card-title>
@@ -23,7 +23,7 @@
 		</p>
 	</mat-card-content>
 	<mat-card-actions>
-		<a routerLink="/app/settings/page" mat-button color="primary">CREATE NEW PAGE</a>
+		<a routerLink="/app/settings/page" mat-raised-button color="primary">CREATE NEW PAGE</a>
 	</mat-card-actions>
 </mat-card>
 
@@ -33,12 +33,11 @@
 	<mat-expansion-panel *ngFor="let p of pages">
 		<mat-expansion-panel-header>
 			<mat-panel-title>{{p.page_title}}</mat-panel-title>
-			<mat-panel-description>Click for options</mat-panel-description>
 		</mat-expansion-panel-header>
 		<mat-action-row>
 			<a routerLink="/app/page/{{p.page_title}}" mat-button color="primary" >View Page</a>
-			<a routerLink="/app/settings/page/{{p.page_title}}" mat-button color="primary" >Edit Page</a>
-			<button mat-button (click)="deletePrompt(p)" color="warn" >Delete Page</button>
+			<a routerLink="/app/settings/page/{{p.page_title}}" mat-raised-button color="primary" >Edit Page</a>
+			<button mat-stroked-button (click)="deletePrompt(p)" color="warn" >Delete Page</button>
 		</mat-action-row>
 	</mat-expansion-panel>
 </mat-accordion>
