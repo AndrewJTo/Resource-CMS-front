@@ -42,7 +42,7 @@ export class ShowResourceComponent implements OnInit {
 			this.text = "<iframe src='" + this.url + "' onload='resizeIframe(this)' style='width:100%; height:85vh'></iframe>"
 		} else if(this.ext == "doc" ||this.ext == "docx" ||this.ext == "xls" || this.ext == "xlsx"||this.ext == "ppt" || this.ext == "pptx" ){
 			console.log("Show previewer")
-			this.text = "https://docs.google.com/viewer?embedded=true&url=" + encodeURIComponent(this.url)
+			this.text = "https://view.officeapps.live.com/op/view.aspx?src=" + encodeURIComponent(this.url)
 			console.log(this.text)
 			this.docViewer = true
 		}
